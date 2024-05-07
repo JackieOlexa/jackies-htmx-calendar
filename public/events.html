@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="general.css">
+
+    <title>MyPlanningPartner</title>
+
+    <script defer src="/__/firebase/10.11.1/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.11.1/firebase-performance-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <script src=https://unpkg.com/htmx.org@1.9.11
+        integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+        crossorigin="anonymous"></script>
+    <script src=https://cdn.tailwindcss.com></script>
+</head>
+
+<body>
+    <div class="topnav">
+        <h1>MyPlanningPartner</h1>
+        <a href="login.html">Log In</a>
+        <a href="logout.html">Log Out</a>
+        <a href="createAccount.html">Create Account</a>
+    </div>
+
+    <div class="navbar">
+        <div class="form-center">
+            <a href="/">Calendar</a>
+            <a href="todo.html">To-do</a>
+            <a href="">Events</a>
+        </div>
+    </div>
+
+    <h2>My Events and Upcoming Holidays</h2>
+
+    <div style="margin-left:5%; float:left; width:40%; border: dotted rgb(63, 212, 253);">
+        <h2>My Personal Events</h2>
+        <div class="todoBox">
+            <h3>Add a new event</h3>
+            <div class="form-center">
+                <form hx-get="https://event-sh43husz6q-uc.a.run.app/" hx-target="#eventList" hx-swap="beforebegin">
+                    <div class="form-center">
+                        <label>Todo Item: </label>
+                        <input type="text" name="item" value="">
+                    </div>
+                    <div class="form-center">
+                        <label>Date: </label>
+                        <input type="datetime" name="date" value="">
+                    </div>
+                    <div class="form-center">
+                        <label>Location: </label>
+                        <input type="text" name="location" value="">
+                    </div>
+                    <div class="form-center">
+                        <label>Details: </label>
+                        <input type="text" name="notes" value="">
+                    </div>
+                    <div class="form-center">
+                        <button>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="events">
+            <br id="eventList" />
+        </div>
+    </div>
+
+    <div style="margin-right:5%; float:right; width:40%; border: dotted rgb(63, 212, 253);">
+        <h2>2024 Holidays</h2>
+        <div id="text">
+        </div>
+
+        <script type="module">
+            const firebaseConfig = {
+                apiKey: null,
+                authDomain: "jackies-first-test.firebaseapp.com",
+                databaseURL: "https://jackies-first-test-default-rtdb.firebaseio.com",
+                projectId: "jackies-first-test",
+                storageBucket: "jackies-first-test.appspot.com",
+                messagingSenderId: "502972278830",
+                appId: "1:502972278830:web:ce3428ef5fe6909cb2d7bf"
+            };
+
+            const app = firebase.app();
+            const db = firebase.firestore();
+            const holidayRef = db.collection('Holidays').doc('2024');
+
+            holidayRef.get().then((doc) => {
+                if (doc.exists) {
+                    console.log(doc.data());
+                    document.getElementById("text").innerHTML = JSON.stringify(doc.data());
+                }
+                else {
+                    console.log("No doc there!");
+                }
+            }).catch((error) => {
+                console.log(error)
+            })
+
+        </script>
+    </div>
+
+</body>
+
+</html>

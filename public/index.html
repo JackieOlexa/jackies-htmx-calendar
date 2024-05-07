@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="general.css">
+
+  <title>MyPlanningPartner</title>
+
+  <script defer src="/__/firebase/10.11.1/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-database-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-functions-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-messaging-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-storage-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-analytics-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-remote-config-compat.js"></script>
+  <script defer src="/__/firebase/10.11.1/firebase-performance-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <script src=https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js></script>
+  <script src=https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js></script>
+  <script src=https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js></script>
+  <script src=https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js></script>
+
+  <script src=https://unpkg.com/htmx.org@1.9.11
+    integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+    crossorigin="anonymous"></script>
+  <script src=https://cdn.tailwindcss.com></script>
+</head>
+
+<body>
+  <div class="topnav">
+    <h1>MyPlanningPartner</h1>
+    <a href="login.html">Log In</a>
+    <a href="logout.html">Log Out</a>
+    <a href="createAccount.html">Create Account</a>
+  </div>
+
+  <div class="form-center" style="margin-top:20px">
+    <div style="width: 75%; background-color: #F8E2AA; border: solid black">
+      <div>
+        <div>
+          <div class="form-center">
+            <h2 style="size: 60px !important"> May </h2>
+          </div>
+          <div style="float:left; color:#09C6FE">
+            <button>
+              < Previous Month </button>
+          </div>
+          <div style="float:right; color:#09C6FE">
+            <button> Next Month > </button>
+          </div>
+        </div>
+      </div>
+      <div style="border-bottom:2px dotted black"> </div>
+      <div class="days-container" style="margin-top:30px">
+        <div class="grid-item">Sunday</div>
+        <div class="grid-item">Monday</div>
+        <div class="grid-item">Tuesday</div>
+        <div class="grid-item">Wednesday</div>
+        <div class="grid-item">Thursday</div>
+        <div class="grid-item">Friday</div>
+        <div class="grid-item">Saturday</div>
+      </div>
+      <div class="grid-container">
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>
+        <div class="grid-item">10</div>
+        <div class="grid-item">11</div>
+        <div class="grid-item">12</div>
+        <div class="grid-item">13</div>
+        <div class="grid-item">14</div>
+        <div class="grid-item">15</div>
+        <div class="grid-item">16</div>
+        <div class="grid-item">17</div>
+        <div class="grid-item">18</div>
+        <div class="grid-item">19</div>
+        <div class="grid-item">20</div>
+        <div class="grid-item">21</div>
+        <div class="grid-item">22</div>
+        <div class="grid-item">23</div>
+        <div class="grid-item">24</div>
+        <div class="grid-item">25</div>
+        <div class="grid-item">26</div>
+        <div class="grid-item">27</div>
+        <div class="grid-item">28</div>
+        <div class="grid-item">29</div>
+        <div class="grid-item">30</div>
+        <div class="grid-item">31</div>
+        <div class="grid-item"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="form-center">
+      <a href="">Calendar</a>
+      <a href="todo.html">To-do</a>
+      <a href="events.html">Events</a>
+    </div>
+  </div>
+
+  <div>
+    <h2>This month's personal todos</h2>
+    <div id="text">
+    </div>
+  </div>
+
+  <div style="height:80px"></div>
+
+  <script type="module">
+    const firebaseConfig = {
+      apiKey: null,
+      authDomain: "jackies-first-test.firebaseapp.com",
+      databaseURL: "https://jackies-first-test-default-rtdb.firebaseio.com",
+      projectId: "jackies-first-test",
+      storageBucket: "jackies-first-test.appspot.com",
+      messagingSenderId: "502972278830",
+      appId: "1:502972278830:web:ce3428ef5fe6909cb2d7bf"
+    };
+
+    const app = firebase.app();
+    const db = firebase.firestore();
+    const holidayRef = db.collection('ToDos').doc('May');
+
+    holidayRef.get().then((doc) => {
+      if (doc.exists) {
+        console.log(doc.data());
+        document.getElementById("text").innerHTML = JSON.stringify(doc.data());
+      }
+      else {
+        console.log("No doc there!");
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+
+  </script>
+</body>
+
+</html>

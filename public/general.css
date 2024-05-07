@@ -1,0 +1,140 @@
+body {
+    background: linear-gradient(to bottom, #fed681, #adf1fb);
+    background-attachment: fixed;
+}
+
+h2 {
+    font-family: "Lucida Handwriting";
+    color: #09C6FE;
+    text-align: center;
+    font-size: 30px !important;
+}
+
+h1 {
+    float: left;
+    color: #09C6FE;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 50px !important;
+    font-family: "Lucida Handwriting";
+}
+
+
+.topnav {
+    background-color: #6ED0FD;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: right;
+    color: black;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav h1 {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: "Lucida Handwriting";
+}
+
+.navbar {
+    background-color: #FFDA9E;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar a {
+    float: center;
+    color: #09C6FE;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.todoBox {
+    margin: auto;
+    width: 50%;
+    background-color: #adf1fb;
+}
+
+.todoBox h3 {
+    font-family: "Lucida Handwriting";
+    color: #09C6FE;
+    text-align: center;
+    font-size: 15px !important;
+}
+
+.todoBox button {
+    left: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 70px;
+    background-color: #09C6FE;
+    border-radius: 12px;
+    border: black;
+}
+
+.form-center {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    border: none;
+    border-bottom: 2px dashed black;
+    background-color: transparent;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 14.285714% 14.285714% 14.285714% 14.285714% 14.285714% 14.285714% 14.285714%;
+    grid-template-rows: 120px 120px 120px 120px 120px;
+    justify-content: center;
+    color: #09C6FE
+}
+
+.grid-item {
+    border: 1px solid black;
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: 14.285714% 14.285714% 14.285714% 14.285714% 14.285714% 14.285714% 14.285714%;
+    justify-content: center;
+    color: #09C6FE
+}
+
+.inoutcreate-container {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 30px;
+    border: 3px dotted black;
+}
+
+.btn {
+    left: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 130px;
+    background-color: #09C6FE;
+    border-radius: 12px;
+    border: black;
+    text-align: center;
+}
